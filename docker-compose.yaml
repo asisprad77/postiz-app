@@ -18,6 +18,8 @@ services:
       TEMPORAL_ADDRESS: 'temporal:7233'
       IS_GENERAL: 'true'
       DISABLE_REGISTRATION: 'false'
+    ports:
+      - '5000:5000'
 
       # === Storage Settings
       STORAGE_PROVIDER: 'local'
