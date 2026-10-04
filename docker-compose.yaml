@@ -4,18 +4,20 @@ services:
     container_name: postiz
     restart: always
     environment:
-      # === Required Settings
-    MAIN_URL: 'https://social.yatradigital.com'
-    FRONTEND_URL: 'https://social.yatradigital.com'
-    NEXT_PUBLIC_BACKEND_URL: 'https://social.yatradigital.com/api'
-    NEXT_PUBLIC_OVERRIDE_BACKEND_URL: 'https://social.yatradigital.com/api'
-    JWT_SECRET: 'your-existing-jwt-secret'
-    DATABASE_URL: 'your-existing-database-url'
-    REDIS_URL: 'your-existing-redis-url'
-    BACKEND_INTERNAL_URL: 'http://localhost:3000'
-    TEMPORAL_ADDRESS: 'temporal:7233'
-    IS_GENERAL: 'true'
-    DISABLE_REGISTRATION: 'false'
+      # === Required Settings ===
+      MAIN_URL: 'https://social.yatradigital.com'
+      FRONTEND_URL: 'https://social.yatradigital.com'
+      NEXT_PUBLIC_BACKEND_URL: 'https://social.yatradigital.com/api'
+      NEXT_PUBLIC_OVERRIDE_BACKEND_URL: 'https://social.yatradigital.com/api'
+
+      JWT_SECRET: 'YOUR_EXISTING_JWT_SECRET'
+      DATABASE_URL: 'YOUR_EXISTING_DATABASE_URL'
+      REDIS_URL: 'YOUR_EXISTING_REDIS_URL'
+
+      BACKEND_INTERNAL_URL: 'http://localhost:3000'
+      TEMPORAL_ADDRESS: 'temporal:7233'
+      IS_GENERAL: 'true'
+      DISABLE_REGISTRATION: 'false'
 
       # === Storage Settings
       STORAGE_PROVIDER: 'local'
