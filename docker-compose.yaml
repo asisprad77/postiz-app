@@ -15,11 +15,9 @@ services:
       TEMPORAL_ADDRESS: 'temporal:7233'
       IS_GENERAL: 'true'
       DISABLE_REGISTRATION: 'false'
-      STORAGE_PROVIDER: 'local'
-      UPLOAD_DIRECTORY: '/uploads'
-      NEXT_PUBLIC_UPLOAD_DIRECTORY: '/uploads'
+
     ports:
-      - '5000:5000'
+      - '4007:5000'
 
       # === Storage Settings
       STORAGE_PROVIDER: 'local'
