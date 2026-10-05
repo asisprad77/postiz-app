@@ -5,18 +5,32 @@ services:
     container_name: postiz
     restart: always
 
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.postiz.rule=Host(`social.yatradigital.com`)"
+      - "traefik.http.routers.postiz.entrypoints=websecure"
+      - "traefik.http.routers.postiz.tls=true"
+      - "traefik.http.routers.postiz.service=postiz"
+      - "traefik.http.services.postiz.loadbalancer.server.port=5000"
+      - "traefik.docker.network=coolify-proxy"
+
     environment:
       MAIN_URL: 'https://social.yatradigital.com'
       FRONTEND_URL: 'https://social.yatradigital.com'
+
       NEXT_PUBLIC_BACKEND_URL: 'https://social.yatradigital.com/api'
       NEXT_PUBLIC_OVERRIDE_BACKEND_URL: 'https://social.yatradigital.com/api'
 
+      # Generate a NEW secret:
+      # openssl rand -hex 32
       JWT_SECRET: '7997c2hTfLB67mDcgqEqxyvuCHTBLGCjzSXIp7K/32jApvCAne/Z0mfPOEuXzWc6'
+
       DATABASE_URL: 'postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local'
       REDIS_URL: 'redis://postiz-redis:6379'
 
       BACKEND_INTERNAL_URL: 'http://localhost:3000'
       TEMPORAL_ADDRESS: 'temporal:7233'
+
       IS_GENERAL: 'true'
       DISABLE_REGISTRATION: 'false'
 
@@ -40,6 +54,8 @@ services:
     networks:
       - postiz-network
       - postiz-temporal-network
+      - coolify-proxy
+
 
   postiz-postgres:
     image: postgres:17-alpine
@@ -62,6 +78,7 @@ services:
     networks:
       - postiz-network
 
+
   postiz-redis:
     image: redis:7.2
     restart: always
@@ -78,6 +95,7 @@ services:
     networks:
       - postiz-network
 
+
   temporal-postgresql:
     image: postgres:16
     restart: always
@@ -91,6 +109,7 @@ services:
 
     networks:
       - postiz-temporal-network
+
 
   temporal-elasticsearch:
     image: elasticsearch:7.17.27
@@ -106,6 +125,7 @@ services:
 
     networks:
       - postiz-temporal-network
+
 
   temporal:
     image: temporalio/auto-setup:1.28.1
@@ -124,13 +144,21 @@ services:
       POSTGRES_USER: temporal
       POSTGRES_PWD: temporal
       POSTGRES_SEEDS: temporal-postgresql
+
       ENABLE_ES: "true"
       ES_SEEDS: temporal-elasticsearch
       ES_VERSION: v7
+
       TEMPORAL_NAMESPACE: default
+
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/development-sql.yaml
+
+    volumes:
+      - ./dynamicconfig:/etc/temporal/config/dynamicconfig
 
     networks:
       - postiz-temporal-network
+
 
   temporal-admin-tools:
     image: temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1
@@ -146,6 +174,7 @@ services:
     networks:
       - postiz-temporal-network
 
+
   temporal-ui:
     image: temporalio/ui:2.34.0
     restart: always
@@ -159,14 +188,27 @@ services:
     networks:
       - postiz-temporal-network
 
+
 networks:
+
   postiz-network:
+
   postiz-temporal-network:
 
+  coolify-proxy:
+    external: true
+
+
 volumes:
+
   postgres-volume:
+
   redis-data:
+
   postiz-config:
+
   postiz-uploads:
+
   temporal-postgres-data:
+
   temporal-elasticsearch-data:
