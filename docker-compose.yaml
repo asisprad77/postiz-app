@@ -37,10 +37,23 @@ services:
       UPLOAD_DIRECTORY: '/uploads'
       NEXT_PUBLIC_UPLOAD_DIRECTORY: '/uploads'
 
-    ports:
-      - '4007:5000'
+      # other settings...
+
+      # === Social Media API Settings
+      X_URL: ''
+      X_API_KEY: ''
+      X_API_SECRET: ''
+    
+      LINKEDIN_CLIENT_ID: ''
+      LINKEDIN_CLIENT_SECRET: ''
+    
       FACEBOOK_APP_ID: '${FACEBOOK_APP_ID}'
       FACEBOOK_APP_SECRET: '${FACEBOOK_APP_SECRET}'
+    
+      # other settings...
+
+    ports:
+      - '4007:5000'
 
     volumes:
       - postiz-config:/config
