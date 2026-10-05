@@ -8,16 +8,16 @@ services:
       MAIN_URL: 'https://social.yatradigital.com'
       FRONTEND_URL: 'https://social.yatradigital.com'
       NEXT_PUBLIC_BACKEND_URL: 'https://social.yatradigital.com/api'
-      NEXT_PUBLIC_OVERRIDE_BACKEND_URL: 'https://social.yatradigital.com/api'
-
-      JWT_SECRET: 'wgLlpeTazo2FcIo8ee3LF8IESV3+FUGJuIpfFygkAnru8I0cZHwf5b5RZdZxM3dA'
+      JWT_SECRET: '7997c2hTfLB67mDcgqEqxyvuCHTBLGCjzSXIp7K/32jApvCAne/Z0mfPOEuXzWc6'
       DATABASE_URL: 'postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local'
       REDIS_URL: 'redis://postiz-redis:6379'
-
       BACKEND_INTERNAL_URL: 'http://localhost:3000'
       TEMPORAL_ADDRESS: 'temporal:7233'
       IS_GENERAL: 'true'
       DISABLE_REGISTRATION: 'false'
+      STORAGE_PROVIDER: 'local'
+      UPLOAD_DIRECTORY: '/uploads'
+      NEXT_PUBLIC_UPLOAD_DIRECTORY: '/uploads'
     ports:
       - '5000:5000'
 
