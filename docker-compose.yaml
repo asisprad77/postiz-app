@@ -39,6 +39,8 @@ services:
 
     ports:
       - '4007:5000'
+      FACEBOOK_APP_ID: '${FACEBOOK_APP_ID}'
+      FACEBOOK_APP_SECRET: '${FACEBOOK_APP_SECRET}'
 
     volumes:
       - postiz-config:/config
