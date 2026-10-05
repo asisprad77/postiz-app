@@ -34,13 +34,13 @@ export class InstagramProvider
   isBetweenSteps = true;
   toolTip = 'Instagram must be business and connected to a Facebook page';
   scopes = [
-    'instagram_business_basic',
-    'pages_show_list',
-    'pages_read_engagement',
-    'business_management',
-    'instagram_content_publish',
-    'instagram_manage_comments',
-    'instagram_manage_insights',
+  'instagram_basic',
+  'pages_show_list',
+  'pages_read_engagement',
+  'business_management',
+  'instagram_content_publish',
+  'instagram_manage_comments',
+  'instagram_manage_insights',
   ];
   override maxConcurrentJob = 400;
   editor = 'normal' as const;
