@@ -77,3 +77,13 @@ const useCommunity = () => {
 - Exposing a stored field to a new external surface (public API, MCP, webhooks) is a data-exposure decision — ask first, and check what existing production rows hold for that column before shipping it.
 - Never silently change the meaning or format of a value persisted in an existing DB column; that affects every reader and all historical rows, so ask first. 
 - Never return a raw Prisma row from a model that holds credentials (`Integration`, `User` and similar) in a controller response. Repository writes on those models must use a `select` with only the fields the caller needs (like `setTimes` with `select: { id: true }`), or the controller returns nothing. This applies even where nearby code looks different.
+
+## Fork / self-hosting rules (social.yatradigital.com)
+
+This repository is a fork of https://github.com/gitroomhq/postiz-app, published at https://github.com/asisprad77/postiz-app and deployed with Coolify on https://social.yatradigital.com. It is licensed under AGPL-3.0.
+
+- AGPL §13: every code change that is deployed to social.yatradigital.com must also be pushed to the public fork, so users of the instance can get the exact source that is running.
+- Never remove or alter `LICENSE`, copyright notices or upstream attribution (including the gitroomhq link in `apps/frontend/src/components/billing/faq.component.tsx`). Never relicense the code or present the instance as the official Postiz service.
+- Never commit secrets (API keys, client secrets, JWT secret, passwords). `docker-compose.yaml` only holds `${VAR}` placeholders; real values live in Coolify -> Environment Variables. `.env` stays gitignored.
+- Configuring a provider's developer keys needs no code change, only env vars. The OAuth redirect URL for each provider is `https://social.yatradigital.com/integrations/social/<provider>` (e.g. `linkedin`, `linkedin-page`).
+- Prefer configuration over code changes, and keep code changes minimal so upstream updates can be merged easily.
