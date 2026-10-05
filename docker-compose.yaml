@@ -20,9 +20,9 @@ services:
       - '4007:5000'
 
       # === Storage Settings
-      STORAGE_PROVIDER: 'local'
-      UPLOAD_DIRECTORY: '/uploads'
-      NEXT_PUBLIC_UPLOAD_DIRECTORY: '/uploads'
+      # STORAGE_PROVIDER: 'local'
+      # UPLOAD_DIRECTORY: '/uploads'
+      # NEXT_PUBLIC_UPLOAD_DIRECTORY: '/uploads'
 
       # === Cloudflare (R2) Settings
       # STORAGE_PROVIDER: 'cloudflare'
