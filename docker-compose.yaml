@@ -39,7 +39,7 @@ services:
 
     networks:
       - postiz-network
-      - temporal-network
+      - postiz-temporal-network
 
   postiz-postgres:
     image: postgres:17-alpine
@@ -90,7 +90,7 @@ services:
       - temporal-postgres-data:/var/lib/postgresql/data
 
     networks:
-      - temporal-network
+      - postiz-temporal-network
 
   temporal-elasticsearch:
     image: elasticsearch:7.17.27
@@ -105,7 +105,7 @@ services:
       - temporal-elasticsearch-data:/usr/share/elasticsearch/data
 
     networks:
-      - temporal-network
+      - postiz-temporal-network
 
   temporal:
     image: temporalio/auto-setup:1.28.1
@@ -130,7 +130,7 @@ services:
       TEMPORAL_NAMESPACE: default
 
     networks:
-      - temporal-network
+      - postiz-temporal-network
 
   temporal-admin-tools:
     image: temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1
@@ -144,7 +144,7 @@ services:
       - temporal
 
     networks:
-      - temporal-network
+      - postiz-temporal-network
 
   temporal-ui:
     image: temporalio/ui:2.34.0
@@ -157,11 +157,11 @@ services:
       - temporal
 
     networks:
-      - temporal-network
+      - postiz-temporal-network
 
 networks:
   postiz-network:
-  temporal-network:
+  postiz-temporal-network:
 
 volumes:
   postgres-volume:
