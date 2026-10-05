@@ -12,7 +12,7 @@ services:
       - "traefik.http.routers.postiz.tls=true"
       - "traefik.http.routers.postiz.service=postiz"
       - "traefik.http.services.postiz.loadbalancer.server.port=5000"
-      - "traefik.docker.network=coolify-proxy"
+      - "traefik.docker.network=coolify"
 
     environment:
       MAIN_URL: 'https://social.yatradigital.com'
@@ -21,8 +21,6 @@ services:
       NEXT_PUBLIC_BACKEND_URL: 'https://social.yatradigital.com/api'
       NEXT_PUBLIC_OVERRIDE_BACKEND_URL: 'https://social.yatradigital.com/api'
 
-      # Generate a NEW secret:
-      # openssl rand -hex 32
       JWT_SECRET: '7997c2hTfLB67mDcgqEqxyvuCHTBLGCjzSXIp7K/32jApvCAne/Z0mfPOEuXzWc6'
 
       DATABASE_URL: 'postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local'
@@ -54,7 +52,7 @@ services:
     networks:
       - postiz-network
       - postiz-temporal-network
-      - coolify-proxy
+      - coolify
 
 
   postiz-postgres:
@@ -195,7 +193,7 @@ networks:
 
   postiz-temporal-network:
 
-  coolify-proxy:
+  coolify:
     external: true
 
 
