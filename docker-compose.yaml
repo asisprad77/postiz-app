@@ -1,5 +1,4 @@
 services:
-
   postiz:
     build:
       context: .
@@ -8,14 +7,14 @@ services:
     restart: always
 
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.postiz.rule=Host(`social.yatradigital.com`)"
-      - "traefik.http.routers.postiz.entrypoints=https"
-      - "traefik.http.routers.postiz.tls=true"
-      - "traefik.http.routers.postiz.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.postiz.service=postiz"
-      - "traefik.http.services.postiz.loadbalancer.server.port=5000"
-      - "traefik.docker.network=coolify"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.postiz.rule=Host(`social.yatradigital.com`)'
+      - 'traefik.http.routers.postiz.entrypoints=https'
+      - 'traefik.http.routers.postiz.tls=true'
+      - 'traefik.http.routers.postiz.tls.certresolver=letsencrypt'
+      - 'traefik.http.routers.postiz.service=postiz'
+      - 'traefik.http.services.postiz.loadbalancer.server.port=5000'
+      - 'traefik.docker.network=coolify'
 
     environment:
       MAIN_URL: 'https://social.yatradigital.com'
@@ -49,10 +48,10 @@ services:
 
       LINKEDIN_CLIENT_ID: '${LINKEDIN_CLIENT_ID}'
       LINKEDIN_CLIENT_SECRET: '${LINKEDIN_CLIENT_SECRET}'
-    
+
       FACEBOOK_APP_ID: '${FACEBOOK_APP_ID}'
       FACEBOOK_APP_SECRET: '${FACEBOOK_APP_SECRET}'
-    
+
       # other settings...
 
     ports:
@@ -73,7 +72,6 @@ services:
       - postiz-temporal-network
       - coolify
 
-
   postiz-postgres:
     image: postgres:17-alpine
     restart: always
@@ -87,7 +85,7 @@ services:
       - postgres-volume:/var/lib/postgresql/data
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postiz-user -d postiz-db-local"]
+      test: ['CMD-SHELL', 'pg_isready -U postiz-user -d postiz-db-local']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -95,13 +93,12 @@ services:
     networks:
       - postiz-network
 
-
   postiz-redis:
     image: redis:7.2
     restart: always
 
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -111,7 +108,6 @@ services:
 
     networks:
       - postiz-network
-
 
   temporal-postgresql:
     image: postgres:16
@@ -127,15 +123,14 @@ services:
     networks:
       - postiz-temporal-network
 
-
   temporal-elasticsearch:
     image: elasticsearch:7.17.27
     restart: always
 
     environment:
       discovery.type: single-node
-      xpack.security.enabled: "false"
-      ES_JAVA_OPTS: "-Xms256m -Xmx256m"
+      xpack.security.enabled: 'false'
+      ES_JAVA_OPTS: '-Xms256m -Xmx256m'
 
     volumes:
       - temporal-elasticsearch-data:/usr/share/elasticsearch/data
@@ -143,13 +138,12 @@ services:
     networks:
       - postiz-temporal-network
 
-
   temporal:
     image: temporalio/auto-setup:1.28.1
     restart: always
 
     ports:
-      - "7233:7233"
+      - '7233:7233'
 
     depends_on:
       - temporal-postgresql
@@ -157,12 +151,12 @@ services:
 
     environment:
       DB: postgres12
-      DB_PORT: "5432"
+      DB_PORT: '5432'
       POSTGRES_USER: temporal
       POSTGRES_PWD: temporal
       POSTGRES_SEEDS: temporal-postgresql
 
-      ENABLE_ES: "true"
+      ENABLE_ES: 'true'
       ES_SEEDS: temporal-elasticsearch
       ES_VERSION: v7
 
@@ -175,7 +169,6 @@ services:
 
     networks:
       - postiz-temporal-network
-
 
   temporal-admin-tools:
     image: temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1
@@ -191,7 +184,6 @@ services:
     networks:
       - postiz-temporal-network
 
-
   temporal-ui:
     image: temporalio/ui:2.34.0
     restart: always
@@ -205,9 +197,7 @@ services:
     networks:
       - postiz-temporal-network
 
-
 networks:
-
   postiz-network:
 
   postiz-temporal-network:
@@ -215,9 +205,7 @@ networks:
   coolify:
     external: true
 
-
 volumes:
-
   postgres-volume:
 
   redis-data:
