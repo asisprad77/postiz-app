@@ -132,7 +132,7 @@ services:
       - postiz-temporal-network
 
   temporal-elasticsearch:
-    image: elasticsearch:7.17.27
+    image: elasticsearch:7.17.28
     restart: always
 
     environment:
@@ -193,7 +193,7 @@ services:
       - postiz-temporal-network
 
   temporal-ui:
-    image: temporalio/ui:2.34.0
+    image: temporalio/ui:2.58.1
     restart: always
 
     environment:
