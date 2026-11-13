@@ -147,7 +147,7 @@ services:
       - postiz-temporal-network
 
   temporal:
-    image: temporalio/auto-setup:1.28.1
+    image: temporalio/auto-setup:1.29.7
     restart: always
 
     ports:
